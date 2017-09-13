@@ -30,8 +30,9 @@ router.post('/', function(req, res){
             console.log('error is', err);
             res.sendStatus(500);
         } else {
-            var queryString = 'INSERT INTO koalaholla (name, gender, age, ready_for_transfer, notes) VALUES ($1, $2, $3, $4, $5)';
-            var values = [input.name, input.age, input.gender, input.ready_for_transfer, input.notes];
+            var queryString = 'INSERT INTO koalaholla (name, age, gender, notes, ready_for_transfer) VALUES ($1, $2, $3, $4, $5)';
+            var values = [input.name, input.age, input.gender, input.notes, input.readyForTransfer];
+            console.log('values ->', values);
             client.query(queryString, values, function(queryErr, resultObj){
                 done();
                 if (queryErr){
