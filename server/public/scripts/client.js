@@ -12,11 +12,11 @@ $( document ).ready( function(){
     // NOT WORKING YET :(
     // using a test object
     var objectToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
+      name: $('#nameIn').val(),
+      age: $('#ageIn').val(),
+      gender: $('#genderIn').val(),
+      readyForTransfer: $('#readyForTransferIn').val(),
+      notes: $('#notesIn').val(),
     };
     // call saveKoala with the new obejct
     saveKoala( objectToSend );
@@ -25,12 +25,17 @@ $( document ).ready( function(){
 
 function getKoalas(){
   console.log( 'in getKoalas' );
+  $('#viewKoalas').empty();
   // ajax call to server to get koalas
   $.ajax({
     url: '/koalas',
     type: 'GET',
     success: function( data ){
       console.log( 'got some koalas: ', data );
+      for (var i = 0; i < data.length; i++) {
+        $('#viewKoalas').append('<tr><td>' + data[i].name + '<td>' + data[i].age + '<td>' + data[i].gender + '<td>' + data[i].ready_for_transfer + '<td>' + data[i].notes);
+        
+      }
     } // end success
   }); //end ajax
   // display on DOM with buttons that allow edit of each
@@ -45,6 +50,7 @@ function saveKoala( newKoala ){
     data: newKoala,
     success: function( data ){
       console.log( 'got some koalas: ', data );
+      getKoalas();
     } // end success
   }); //end ajax
 }
