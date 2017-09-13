@@ -15,8 +15,15 @@ $( document ).ready( function(){
       name: $('#nameIn').val(),
       age: $('#ageIn').val(),
       gender: $('#genderIn').val(),
-      readyForTransfer: $('#readyForTransferIn').val(),
+      // readyForTransfer: $('#readyForTransferIn').val(),
       notes: $('#notesIn').val(),
+    };
+    if ($('#readyForTransferIn').val()==="true"){
+      objectToSend.readyForTransfer=true;
+    } else if ($('#readyForTransferIn').val()==="false") {
+      objectToSend.readyForTransfer=false;      
+    } else {
+      console.log('You tried');
     };
     // call saveKoala with the new obejct
     saveKoala( objectToSend );
